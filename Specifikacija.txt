@@ -1,0 +1,44 @@
+Specifikacija Sistema placanja
+
+## Transakcija -> Uplatilac, Primalac, Valuta, Provizija, Nacin placanja
+	Svaka transakcija moze imati samo jednog uplatioca a svaki uplatioc moze imati nijednu ili vise transakcija
+		Uplatioc moze biti klijent a ne mora.
+	Svaka transakcija moze imati samo jednog primaoca a svaki primaoc moze imati nijednu ili vise transakcija
+		Primaoc mora biti klijent
+	Svaka transakcija moze imati samo jednu valutu u kojoj se obavlja transakcija, svaka valuta se moze naci u vise transakcija
+	Svaka transakcija moze imati samo jedan nacin placanja, svaki nacin placanja moze da se dogodi u vise transakcija
+		Nacin placanja moze biti u Gotovini, preko racuna, preko Kartice
+	Svaka banka moze a ne mora naplacivati proviziju
+
+Nacini placanja -> Sifra placanja, Kartica, Nalog za uplatu, Nalog za prenos, Preko Racuna
+	Nacin placanja moze imati samo jednu sifru placanja, svaka sifra placanja moze odgovarati samo jednom nacinu placanja
+	Nacin placanja moze biti Karticom, Nalogom za uplatu, Nalogom za prenos
+		Svaka Kartica mora imati: ID, vrstu(Visa, Master, Maestro), Banku odakle je izdata, Klijenta, Valutu
+
+## Banka -> Ime banke, Broj banke, Klijenti
+	Banka mora imati samo jedno ime i svako ime je vezano samo za jednu banku
+	Banka mora imati samo jedan broj i svaki broj pripada iskljucivo jednoj banci
+	Banka moze imati nijednog ili vise klijenata, klijent moze imati nijednu ili vise banaka
+	Banka moze imati nijedan ili vise racuna, svaki racun postoji samo u jednoj banci
+		Svaki racun ima tacno jedan br racuna
+		Svaki racun ima tacno jednog klijenta
+		Svaki racun mora imati jednu ili vise valuta
+		
+## Klijenti -> Pravna/Fizicka lica, Ime, Br. Racuna (Ne mora imati racun u toj banci, ili ako placa u kesu)
+	Klijent moze biti u 1 ili vise banaka, banka moze imati 0 ili vise klijenata
+	Klijent moze biti pravno ili fizicko lice
+		Ako je pravno mora posedovati pecat
+	Klijent moze imati samo jedno ime
+	Klijent moze imati jedan ili vise brojeva racuna u banci, svaki racun ima tacno jednog klijenta
+
+## Valuta -> Kurs, Domaca/Strana, Fizicka/Kripto
+	Svaka valuta mora imati svoj kurs
+	Valuta moze biti Fizicka ili Kriptovaluta
+	Valuta moze biti Domaca ili Strana
+
+Ziro Racun -> Klijent, Banka, Broj, Tip
+	Svaki ziro racun mora imati samo jednog klijenta
+	Svaki ziro racun mora da bude registrovan kod tacne jedne banke
+	Svaki ziro racun mora imati svoj jedinstveni broj, svaki broj racuna je vezan iskljucivo za jedan racun
+	Svaki ziro racun mora imati tip:
+		Dinarski ili Devizni
