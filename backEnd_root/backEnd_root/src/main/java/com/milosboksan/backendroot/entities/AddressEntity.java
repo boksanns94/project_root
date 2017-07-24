@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
+ * 
  * AddressEntity - For storing data on clients and banks address.
  * Author: Milos Boksan
  * Created on: 00:13 24.07.2017.

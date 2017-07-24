@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
+ * 
  * CurrencyEntity - For storing data on currencies.
  * Author: Milos Boksan
  * Created on: 02:49 24.07.2017.

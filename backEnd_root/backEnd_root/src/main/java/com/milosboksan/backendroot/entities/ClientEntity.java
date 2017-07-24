@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
+ * 
  * ClientEntity - For storing data on a single client.
  * Author: Milos Boksan
  * Created on: 03:06 24.07.2017.

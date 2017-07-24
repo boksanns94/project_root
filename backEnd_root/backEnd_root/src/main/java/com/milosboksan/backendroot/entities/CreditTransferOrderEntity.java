@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /*
+ * 
  * CreditTransferOrderEntity - For storing data about a single credit transfer.
  * Author: Milos Boksan
  * Created on: 02:55 24.07.2017.

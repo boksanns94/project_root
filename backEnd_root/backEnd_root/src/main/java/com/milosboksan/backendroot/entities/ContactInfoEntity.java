@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
+ * 
  * ContactInfoEntity - For storing data on clients and banks contact info.
  * Author: Milos Boksan
  * Created on: 00:22 24.07.2017.

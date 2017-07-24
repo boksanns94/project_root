@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /*
+ * 
  * CustomerAccountEntity - For storing data on customer accounts.
  * Author: Milos Boksan
  * Created on: 02:26 24.07.2017.

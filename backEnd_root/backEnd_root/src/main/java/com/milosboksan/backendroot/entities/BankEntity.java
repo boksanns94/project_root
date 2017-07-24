@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /*
+ * 
  * BankEntity - For storing legal data for bank.
  * Author: Milos Boksan
  * Created on: 02:22 24.07.2017.
