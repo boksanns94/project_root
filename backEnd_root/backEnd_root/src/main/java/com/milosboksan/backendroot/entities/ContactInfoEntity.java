@@ -1,8 +1,17 @@
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -14,9 +23,11 @@ import java.util.List;
 @Entity
 public class ContactInfoEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable = false, unique = true)
 	private String email;
 	@Column(nullable = false, unique = true)
@@ -24,8 +35,13 @@ public class ContactInfoEntity
 	@Column(unique = true)
 	private String secondaryPhone;
 	
-	private List<ClientEntity> clients;
-	private List<BankEntity> banks;
+	@JsonBackReference
+	@OneToOne(mappedBy = "clientContact", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private ClientEntity client;
+	
+	@JsonBackReference
+	@OneToOne(mappedBy = "bankContact", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private BankEntity bank;
 	
 	@Version
 	private Integer version;
@@ -36,14 +52,14 @@ public class ContactInfoEntity
 	}
 	
 	public ContactInfoEntity(Integer id, String email, String primaryPhone, String secondaryPhone,
-			List<ClientEntity> clients, List<BankEntity> banks, Integer version) {
+			ClientEntity client, BankEntity bank, Integer version) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.primaryPhone = primaryPhone;
 		this.secondaryPhone = secondaryPhone;
-		this.clients = clients;
-		this.banks = banks;
+		this.client = client;
+		this.bank = bank;
 		this.version = version;
 	}
 
@@ -80,20 +96,20 @@ public class ContactInfoEntity
 		this.secondaryPhone = secondaryPhone;
 	}
 
-	public List<ClientEntity> getClients() {
-		return clients;
+	public ClientEntity getClients() {
+		return client;
 	}
 
-	public void setClients(List<ClientEntity> clients) {
-		this.clients = clients;
+	public void setClients(ClientEntity client) {
+		this.client = client;
 	}
 
-	public List<BankEntity> getBanks() {
-		return banks;
+	public BankEntity getBanks() {
+		return bank;
 	}
 
-	public void setBanks(List<BankEntity> banks) {
-		this.banks = banks;
+	public void setBanks(BankEntity bank) {
+		this.bank = bank;
 	}
 	
 	public Integer getVersion() {

@@ -1,10 +1,20 @@
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
-
 import java.time.LocalDate;
-
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -16,9 +26,11 @@ import java.util.List;
 @Entity
 public class CustomerAccountEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable = false)
 	private Integer accountType;//0 - Administrator, 1 - User / 1 - default
 	@Column(nullable = false, unique = true)
@@ -34,10 +46,21 @@ public class CustomerAccountEntity
 	@Column(nullable = false)
 	private LocalDate latestActivity;
 	
+	@JsonBackReference
+	@OneToMany(mappedBy = "customerAccounts", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private ClientEntity owner;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "bankAccounts")
 	private BankEntity bank;
-	private List<CreditTransferOrderEntity> transfersToAccount;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "payerAccount", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<CreditTransferOrderEntity> transfersFromAccount;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "recipientAccount", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private List<CreditTransferOrderEntity> transfersToAccount;
 	
 	@Version
 	private Integer version;

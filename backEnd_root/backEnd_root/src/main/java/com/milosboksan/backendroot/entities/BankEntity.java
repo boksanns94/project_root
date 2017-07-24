@@ -1,8 +1,21 @@
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -14,17 +27,34 @@ import java.util.List;
 @Entity
 public class BankEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable = false, unique = true)
 	private String bankName;
 	@Column(nullable = false, unique = true)
 	private String bankIdNumber;//The first three numbers in an account number
 	
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "bankAddress")
 	private AddressEntity address;
+	
+	@JsonManagedReference
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "bankContact")
 	private ContactInfoEntity contactInfo;
-	private List<ClientEntity> clients;
+	
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "clients")
+	private ClientEntity client;
+	
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "bankAccounts")
 	private List<CustomerAccountEntity> accounts;
 	
 	@Version
@@ -36,7 +66,7 @@ public class BankEntity
 	}
 	
 	public BankEntity(Integer id, String bankName, String bankIdNumber, AddressEntity address,
-			ContactInfoEntity contactInfo, List<ClientEntity> clients, List<CustomerAccountEntity> accounts,
+			ContactInfoEntity contactInfo, ClientEntity client, List<CustomerAccountEntity> accounts,
 			String version) {
 		super();
 		this.id = id;
@@ -44,7 +74,7 @@ public class BankEntity
 		this.bankIdNumber = bankIdNumber;
 		this.address = address;
 		this.contactInfo = contactInfo;
-		this.clients = clients;
+		this.client = client;
 		this.accounts = accounts;
 		this.version = version;
 	}
@@ -90,12 +120,12 @@ public class BankEntity
 		this.contactInfo = contactInfo;
 	}
 
-	public List<ClientEntity> getClients() {
-		return clients;
+	public ClientEntity getClients() {
+		return client;
 	}
 
-	public void setClients(List<ClientEntity> clients) {
-		this.clients = clients;
+	public void setClients(ClientEntity client) {
+		this.client = client;
 	}
 
 	public List<CustomerAccountEntity> getAccounts() {

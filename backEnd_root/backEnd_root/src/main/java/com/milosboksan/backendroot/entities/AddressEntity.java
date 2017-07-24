@@ -1,8 +1,21 @@
+
+
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -14,6 +27,7 @@ import java.util.List;
 @Entity
 public class AddressEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -31,7 +45,12 @@ public class AddressEntity
 	@Column(nullable = false)
 	private String countryName;
 	
+	@JsonBackReference
+	@OneToMany(mappedBy = "clientAddress", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<ClientEntity> clients;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "bankAddress", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<BankEntity> banks;
 
 	@Version

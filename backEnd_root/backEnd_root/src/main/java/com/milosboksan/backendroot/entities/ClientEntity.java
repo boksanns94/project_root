@@ -1,8 +1,24 @@
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -14,9 +30,11 @@ import java.util.List;
 @Entity
 public class ClientEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable = false)
 	private Integer clientType;//0 - Legal person, 1 - Natural person / 1 - default
 	@Column(nullable = false)
@@ -26,11 +44,19 @@ public class ClientEntity
 	@Column(nullable = false, unique = true)
 	private String jmbg;
 	
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "clientAddress")
 	private AddressEntity address;
+	
+	@JsonManagedReference
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "clientContact", unique = true)
 	private ContactInfoEntity contactInfo;
 	
 	@Column(nullable = false, unique = true)
 	private String username;
+	@JsonIgnore
 	@Column(nullable = false, unique = true)
 	private String password;
 	@Column(nullable = false)
@@ -38,8 +64,17 @@ public class ClientEntity
 	@Column(nullable = false)
 	private Integer authorisationLevel;//0 - Administrator, 1 - User / 1 - default
 	
-	private BankEntity bank;
+	@JsonBackReference
+	@OneToMany(mappedBy = "clients", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private List<BankEntity> bank;
+	
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerAccounts")
 	private List<CustomerAccountEntity> accounts;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "payingClient", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<CreditTransferOrderEntity> transactionHistory;
 	
 	@Version
@@ -51,7 +86,7 @@ public class ClientEntity
 	}
 
 	public ClientEntity(Integer id, Integer clientType, String name, String surname, String jmbg, AddressEntity address,
-			ContactInfoEntity contactInfo, BankEntity bank, List<CustomerAccountEntity> accounts,
+			ContactInfoEntity contactInfo, List<BankEntity> bank, List<CustomerAccountEntity> accounts,
 			List<CreditTransferOrderEntity> transactionHistory, String username, String password, Integer status,
 			Integer authorisationLevel, Integer version) {
 		super();
@@ -161,11 +196,11 @@ public class ClientEntity
 		this.authorisationLevel = authorisationLevel;
 	}
 
-	public BankEntity getBank() {
+	public List<BankEntity> getBank() {
 		return bank;
 	}
 
-	public void setBank(BankEntity bank) {
+	public void setBank(List<BankEntity> bank) {
 		this.bank = bank;
 	}
 

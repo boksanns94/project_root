@@ -1,8 +1,16 @@
 package com.milosboksan.backendroot.entities;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * 
@@ -14,9 +22,11 @@ import java.util.List;
 @Entity
 public class CurrencyEntity
 {
+	@JsonProperty("ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable = false, unique = true)
 	private String currencyName;
 	@Column(nullable = false, unique = true)
@@ -28,6 +38,8 @@ public class CurrencyEntity
 	@Column(nullable = false)
 	private Double lowerExchangeRate;
 	
+	@JsonBackProperty
+	@OneToMany(mappedBy = "currency", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private CreditTransferOrderEntity transfer;
 	
 	@Version
