@@ -1,5 +1,7 @@
 package com.milosboksan.backendroot.entities;
 
+import javax.persistence.*;
+
 import java.time.LocalDate;
 
 /*
@@ -8,17 +10,35 @@ import java.time.LocalDate;
  * Created on: 02:55 24.07.2017.
  */
 
+@Entity
 public class CreditTransferOrderEntity
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String recipient;
-	private String transferPurpose;
-	private Integer paymentCode;
+	@Column(nullable = false)
+	private String recipient;//Any recipient data can be recorded here, preferably an account number. Used to check if account exists.
+	@Column(nullable = false)
+	private String transferPurpose;//Translation: SVRHA UPLATE
+	@Column(nullable = false)
+	private Integer paymentCode;//Translation: SIFRA PLACANJA
+	@Column(nullable = false)
 	private Double ammount;
-	private String modelNumber;
-	private String referenceNumber;
+	@Column
+	private String modelNumber;//97 - default
+	@Column
+	private String referenceNumber;//Translation: POZIV NA BROJ / null - default
+	@Column(nullable = false)
 	private LocalDate paymentDate;
+	@Column(nullable = false)
 	private Boolean urgencyStatus;//0 - Not urgent, 1 - Urgent / 0 - default
+	
+	private ClientEntity payingClient;
+	private CustomerAccountEntity payerAccount;
+	private CustomerAccountEntity recipientAccount;
+	private CurrencyEntity currency;
+	
+	@Version
 	private Integer version;
 	
 	//Constructors
@@ -28,7 +48,8 @@ public class CreditTransferOrderEntity
 
 	public CreditTransferOrderEntity(Integer id, String recipient, String transferPurpose, Integer paymentCode,
 			Double ammount, String modelNumber, String referenceNumber, LocalDate paymentDate, Boolean urgencyStatus,
-			Integer version) {
+			ClientEntity payingClient, CustomerAccountEntity payerAccount, CustomerAccountEntity recipientAccount,
+			CurrencyEntity currency, Integer version) {
 		super();
 		this.id = id;
 		this.recipient = recipient;
@@ -39,10 +60,14 @@ public class CreditTransferOrderEntity
 		this.referenceNumber = referenceNumber;
 		this.paymentDate = paymentDate;
 		this.urgencyStatus = urgencyStatus;
+		this.payingClient = payingClient;
+		this.payerAccount = payerAccount;
+		this.recipientAccount = recipientAccount;
+		this.currency = currency;
 		this.version = version;
 	}
 	
-	//get() and set() methods
+	//get() i set() metode
 	public Integer getId() {
 		return id;
 	}
@@ -115,6 +140,38 @@ public class CreditTransferOrderEntity
 		this.urgencyStatus = urgencyStatus;
 	}
 
+	public ClientEntity getPayingClient() {
+		return payingClient;
+	}
+
+	public void setPayingClient(ClientEntity payingClient) {
+		this.payingClient = payingClient;
+	}
+
+	public CustomerAccountEntity getPayerAccount() {
+		return payerAccount;
+	}
+
+	public void setPayerAccount(CustomerAccountEntity payerAccount) {
+		this.payerAccount = payerAccount;
+	}
+
+	public CustomerAccountEntity getRecipientAccount() {
+		return recipientAccount;
+	}
+
+	public void setRecipientAccount(CustomerAccountEntity recipientAccount) {
+		this.recipientAccount = recipientAccount;
+	}
+
+	public CurrencyEntity getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(CurrencyEntity currency) {
+		this.currency = currency;
+	}
+
 	public Integer getVersion() {
 		return version;
 	}
@@ -123,4 +180,5 @@ public class CreditTransferOrderEntity
 		this.version = version;
 	}
 
+	
 }

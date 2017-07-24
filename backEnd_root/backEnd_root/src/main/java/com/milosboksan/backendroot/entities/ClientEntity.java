@@ -1,24 +1,48 @@
 package com.milosboksan.backendroot.entities;
 
+import javax.persistence.*;
+
+import java.util.List;
+
 /*
  * ClientEntity - For storing data on a single client.
  * Author: Milos Boksan
  * Created on: 03:06 24.07.2017.
  */
 
+@Entity
 public class ClientEntity
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private Integer clientType;//0 - Legal person, 1 - Natural person / 1 - default
+	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private String surname;
+	@Column(nullable = false, unique = true)
 	private String jmbg;
+	
 	private AddressEntity address;
 	private ContactInfoEntity contactInfo;
+	
+	@Column(nullable = false, unique = true)
 	private String username;
+	@Column(nullable = false, unique = true)
 	private String password;
-	private Boolean status;//0 - Inactive, 1 - Active / 1 - default
+	@Column(nullable = false)
+	private Integer status;//0 - Inactive, 1 - Active / 1 - default
+	@Column(nullable = false)
 	private Integer authorisationLevel;//0 - Administrator, 1 - User / 1 - default
+	
+	private BankEntity bank;
+	private List<CustomerAccountEntity> accounts;
+	private List<CreditTransferOrderEntity> transactionHistory;
+	
+	@Version
+	private Integer version;
 	
 	//Constructors
 	public ClientEntity() {
@@ -26,8 +50,9 @@ public class ClientEntity
 	}
 
 	public ClientEntity(Integer id, Integer clientType, String name, String surname, String jmbg, AddressEntity address,
-			ContactInfoEntity contactInfo, String username, String password, Boolean status,
-			Integer authorisationLevel) {
+			ContactInfoEntity contactInfo, BankEntity bank, List<CustomerAccountEntity> accounts,
+			List<CreditTransferOrderEntity> transactionHistory, String username, String password, Integer status,
+			Integer authorisationLevel, Integer version) {
 		super();
 		this.id = id;
 		this.clientType = clientType;
@@ -36,10 +61,14 @@ public class ClientEntity
 		this.jmbg = jmbg;
 		this.address = address;
 		this.contactInfo = contactInfo;
+		this.bank = bank;
+		this.accounts = accounts;
+		this.transactionHistory = transactionHistory;
 		this.username = username;
 		this.password = password;
 		this.status = status;
 		this.authorisationLevel = authorisationLevel;
+		this.version = version;
 	}
 	
 	//get() and set() methods
@@ -115,11 +144,11 @@ public class ClientEntity
 		this.password = password;
 	}
 
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -129,6 +158,38 @@ public class ClientEntity
 
 	public void setAuthorisationLevel(Integer authorisationLevel) {
 		this.authorisationLevel = authorisationLevel;
+	}
+
+	public BankEntity getBank() {
+		return bank;
+	}
+
+	public void setBank(BankEntity bank) {
+		this.bank = bank;
+	}
+
+	public List<CustomerAccountEntity> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<CustomerAccountEntity> accounts) {
+		this.accounts = accounts;
+	}
+
+	public List<CreditTransferOrderEntity> getTransactionHistory() {
+		return transactionHistory;
+	}
+
+	public void setTransactionHistory(List<CreditTransferOrderEntity> transactionHistory) {
+		this.transactionHistory = transactionHistory;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.milosboksan.backendroot.entities;
 
+import javax.persistence.*;
+
 import java.util.List;
 
 /*
@@ -8,15 +10,26 @@ import java.util.List;
  * Created on: 02:49 24.07.2017.
  */
 
+@Entity
 public class CurrencyEntity
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false, unique = true)
 	private String currencyName;
+	@Column(nullable = false, unique = true)
 	private String isoCode;
+	@Column(nullable = false)
 	private Double upperExchangeRate;
+	@Column(nullable = false)
 	private Double middleExchangeRate;
+	@Column(nullable = false)
 	private Double lowerExchangeRate;
-	private List<CustomerAccountEntity> accountList;
+	
+	private CreditTransferOrderEntity transfer;
+	
+	@Version
 	private Integer version;
 	
 	//Constructors
@@ -25,7 +38,7 @@ public class CurrencyEntity
 	}
 
 	public CurrencyEntity(Integer id, String currencyName, String isoCode, Double upperExchangeRate,
-			Double middleExchangeRate, Double lowerExchangeRate, List<CustomerAccountEntity> accountList,
+			Double middleExchangeRate, Double lowerExchangeRate, CreditTransferOrderEntity transfer,
 			Integer version) {
 		super();
 		this.id = id;
@@ -34,7 +47,7 @@ public class CurrencyEntity
 		this.upperExchangeRate = upperExchangeRate;
 		this.middleExchangeRate = middleExchangeRate;
 		this.lowerExchangeRate = lowerExchangeRate;
-		this.accountList = accountList;
+		this.transfer = transfer;
 		this.version = version;
 	}
 	
@@ -87,12 +100,12 @@ public class CurrencyEntity
 		this.lowerExchangeRate = lowerExchangeRate;
 	}
 
-	public List<CustomerAccountEntity> getAccountList() {
-		return accountList;
+	public CreditTransferOrderEntity getTransfer() {
+		return transfer;
 	}
 
-	public void setAccountList(List<CustomerAccountEntity> accountList) {
-		this.accountList = accountList;
+	public void setAccounts(CreditTransferOrderEntity transfer) {
+		this.transfer = transfer;
 	}
 
 	public Integer getVersion() {
@@ -102,4 +115,5 @@ public class CurrencyEntity
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+
 }

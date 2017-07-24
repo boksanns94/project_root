@@ -1,7 +1,10 @@
 package com.milosboksan.backendroot.entities;
 
-import java.util.List;
+import javax.persistence.*;
+
 import java.time.LocalDate;
+
+import java.util.List;
 
 /*
  * CustomerAccountEntity - For storing data on customer accounts.
@@ -9,18 +12,33 @@ import java.time.LocalDate;
  * Created on: 02:26 24.07.2017.
  */
 
+@Entity
 public class CustomerAccountEntity
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(nullable = false)
 	private Integer accountType;//0 - Administrator, 1 - User / 1 - default
+	@Column(nullable = false, unique = true)
 	private String accountNumber;
-	private Boolean status;//0 - Disabled, 1 - Enabled // 1 - default
+	@Column(nullable = false)
+	private Integer status;//0 - Disabled, 1 - Enabled // 1 - default
+	@Column(nullable = false)
 	private Double accountBalance;
+	@Column(nullable = false)
 	private Double availableBalance;
+	@Column(nullable = false)
 	private Double reservedBalance;
+	@Column(nullable = false)
+	private LocalDate latestActivity;
+	
+	private ClientEntity owner;
+	private BankEntity bank;
 	private List<CreditTransferOrderEntity> transfersToAccount;
 	private List<CreditTransferOrderEntity> transfersFromAccount;
-	private LocalDate latestActivity;
+	
+	@Version
 	private Integer version;
 	
 	//Constructors
@@ -28,10 +46,10 @@ public class CustomerAccountEntity
 		super();
 	}
 
-	public CustomerAccountEntity(Integer id, Integer accountType, String accountNumber, Boolean status,
-			Double accountBalance, Double availableBalance, Double reservedBalance,
-			List<CreditTransferOrderEntity> transfersToAccount, List<CreditTransferOrderEntity> transfersFromAccount,
-			LocalDate latestActivity, Integer version) {
+	public CustomerAccountEntity(Integer id, Integer accountType, String accountNumber, Integer status,
+			Double accountBalance, Double availableBalance, Double reservedBalance, LocalDate latestActivity,
+			ClientEntity owner, BankEntity bank, List<CreditTransferOrderEntity> transfersToAccount,
+			List<CreditTransferOrderEntity> transfersFromAccount, Integer version) {
 		super();
 		this.id = id;
 		this.accountType = accountType;
@@ -40,9 +58,11 @@ public class CustomerAccountEntity
 		this.accountBalance = accountBalance;
 		this.availableBalance = availableBalance;
 		this.reservedBalance = reservedBalance;
+		this.latestActivity = latestActivity;
+		this.owner = owner;
+		this.bank = bank;
 		this.transfersToAccount = transfersToAccount;
 		this.transfersFromAccount = transfersFromAccount;
-		this.latestActivity = latestActivity;
 		this.version = version;
 	}
 	
@@ -71,11 +91,11 @@ public class CustomerAccountEntity
 		this.accountNumber = accountNumber;
 	}
 
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -103,6 +123,30 @@ public class CustomerAccountEntity
 		this.reservedBalance = reservedBalance;
 	}
 
+	public LocalDate getLatestActivity() {
+		return latestActivity;
+	}
+
+	public void setLatestActivity(LocalDate latestActivity) {
+		this.latestActivity = latestActivity;
+	}
+
+	public ClientEntity getOwner() {
+		return owner;
+	}
+
+	public void setOwner(ClientEntity owner) {
+		this.owner = owner;
+	}
+
+	public BankEntity getBank() {
+		return bank;
+	}
+
+	public void setBank(BankEntity bank) {
+		this.bank = bank;
+	}
+
 	public List<CreditTransferOrderEntity> getTransfersToAccount() {
 		return transfersToAccount;
 	}
@@ -119,14 +163,6 @@ public class CustomerAccountEntity
 		this.transfersFromAccount = transfersFromAccount;
 	}
 
-	public LocalDate getLatestActivity() {
-		return latestActivity;
-	}
-
-	public void setLatestActivity(LocalDate latestActivity) {
-		this.latestActivity = latestActivity;
-	}
-
 	public Integer getVersion() {
 		return version;
 	}
@@ -134,5 +170,5 @@ public class CustomerAccountEntity
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-	
+
 }
