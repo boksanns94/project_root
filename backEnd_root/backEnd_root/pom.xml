@@ -48,8 +48,9 @@
 		
 		<dependency>
 			<groupId>mysql</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+</dependency>
 	</dependencies>
 
 	<build>
