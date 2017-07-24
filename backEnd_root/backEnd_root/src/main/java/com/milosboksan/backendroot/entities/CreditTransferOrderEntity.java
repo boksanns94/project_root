@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,6 +45,10 @@ public class CreditTransferOrderEntity
 	@Column
 	private String referenceNumber;//Translation: POZIV NA BROJ / null - default
 	@Column(nullable = false)
+	@JsonFormat(
+			shape = JsonFormat.Shape.STRING,
+			pattern = "dd-MM-yyyy hh:mm:ss"
+			)
 	private LocalDate paymentDate;
 	@Column(nullable = false)
 	private Boolean urgencyStatus;//0 - Not urgent, 1 - Urgent / 0 - default

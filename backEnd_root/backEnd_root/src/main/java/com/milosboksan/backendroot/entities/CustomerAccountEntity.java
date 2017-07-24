@@ -122,13 +122,10 @@ public class CustomerAccountEntity
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
+	
+	//The account balance is always calculated
 	public Double getAccountBalance() {
-		return accountBalance;
-	}
-
-	public void setAccountBalance(Double accountBalance) {
-		this.accountBalance = accountBalance;
+		return this.availableBalance-this.reservedBalance;
 	}
 
 	public Double getAvailableBalance() {

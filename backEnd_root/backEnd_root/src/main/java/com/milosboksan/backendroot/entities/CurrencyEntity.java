@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
@@ -38,7 +39,7 @@ public class CurrencyEntity
 	@Column(nullable = false)
 	private Double lowerExchangeRate;
 	
-	@JsonBackProperty
+	@JsonBackReference
 	@OneToMany(mappedBy = "currency", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private CreditTransferOrderEntity transfer;
 	
