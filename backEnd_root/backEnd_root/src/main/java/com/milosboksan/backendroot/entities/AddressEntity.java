@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created on: 00:13 24.07.2017.
  */
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class AddressEntity
 {

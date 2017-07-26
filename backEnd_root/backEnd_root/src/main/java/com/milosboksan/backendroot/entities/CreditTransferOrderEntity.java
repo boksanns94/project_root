@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created on: 02:55 24.07.2017.
  */
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class CreditTransferOrderEntity
 {
