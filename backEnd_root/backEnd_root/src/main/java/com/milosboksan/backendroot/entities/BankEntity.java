@@ -11,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -52,9 +54,8 @@ public class BankEntity
 	@JoinColumn(name = "clients")
 	private ClientEntity client;
 	
-	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name = "bankAccounts")
+	@JsonBackReference
+	@OneToMany(mappedBy = "bankAccounts", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<CustomerAccountEntity> accounts;
 	
 	@Version

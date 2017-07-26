@@ -1,6 +1,6 @@
 package com.milosboksan.backendroot.entities.dto;
 
-public abstract class AddressContactInfoDTO
+public class AddressContactInfoDTO
 {
 	private String streetName;
 	private String streetNumber;

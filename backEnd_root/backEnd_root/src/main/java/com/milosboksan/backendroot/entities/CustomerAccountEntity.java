@@ -10,10 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
@@ -46,12 +49,14 @@ public class CustomerAccountEntity
 	@Column(nullable = false)
 	private LocalDate latestActivity;//Default is creation date
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "customerAccounts", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerAccounts")
 	private ClientEntity owner;
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "bankAccounts")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "bankAccounts")
 	private BankEntity bank;
 	
 	@JsonBackReference

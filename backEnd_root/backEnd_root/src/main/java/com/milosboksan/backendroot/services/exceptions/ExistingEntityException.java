@@ -8,17 +8,17 @@ public class ExistingEntityException extends Exception
 		super();
 	}
 	
-	//If entity doesnt exist return message
+	//If entity doesn't exist return message
 	public ExistingEntityException(String message) {
 		super(message);
 	}
 	
-	//If the entity doesnt exist return Error
+	//If the entity doesn't exist return Error
 	public ExistingEntityException(Throwable cause) {
 		super(cause);
 	}
 	
-	//If the entity doesnt exist return a message and Error Code
+	//If the entity doesn't exist return a message and Error Code
 	public ExistingEntityException(String message, Throwable cause) {
 		super(message, cause);
 	}

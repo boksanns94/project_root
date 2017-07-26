@@ -68,9 +68,8 @@ public class ClientEntity
 	@OneToMany(mappedBy = "clients", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<BankEntity> bank;
 	
-	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name = "customerAccounts")
+	@JsonBackReference
+	@OneToMany(mappedBy = "customerAccounts", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<CustomerAccountEntity> accounts;
 	
 	@JsonBackReference
