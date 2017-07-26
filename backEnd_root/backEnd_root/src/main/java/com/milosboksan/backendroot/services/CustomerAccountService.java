@@ -3,6 +3,7 @@ package com.milosboksan.backendroot.services;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.milosboksan.backendroot.entities.CustomerAccountEntity;
 import com.milosboksan.backendroot.entities.dto.CustomerAccountDTO;
@@ -11,6 +12,7 @@ import com.milosboksan.backendroot.repositories.ClientRepository;
 import com.milosboksan.backendroot.repositories.CustomerAccountRepository;
 import com.milosboksan.backendroot.services.exceptions.ExistingEntityException;
 
+@Service
 public class CustomerAccountService
 {
 	private BankRepository bankRepository;

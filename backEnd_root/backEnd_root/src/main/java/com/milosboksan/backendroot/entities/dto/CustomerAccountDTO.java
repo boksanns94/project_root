@@ -5,7 +5,7 @@ public class CustomerAccountDTO
 	private Integer accountType;
 	private String accountNumber;
 	private Integer status;
-	//The <*balance> fields and the <latestActivity> field will be filled in automatically
+	//The <*balance> fields and the <latestActivity> field will be filled in automatically to the default values
 	private Integer ownerID;
 	private Integer bankID;
 	

@@ -9,7 +9,7 @@ public class ClientDTO extends AddressContactInfoDTO
 	
 	//Information on authentication details
 	private String username;
-	private String password;//Initial value is set by an administrator. It can be changed by a user afterwards.
+	private String password;
 	private Integer status;//0 - Inactive, 1 - Active / 1 - default
 	private Integer authorisationLevel;//0 - Administrator, 1 - User / 1 - default
 	

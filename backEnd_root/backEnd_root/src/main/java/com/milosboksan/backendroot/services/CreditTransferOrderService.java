@@ -2,6 +2,9 @@ package com.milosboksan.backendroot.services;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.milosboksan.backendroot.entities.CreditTransferOrderEntity;
 import com.milosboksan.backendroot.entities.CustomerAccountEntity;
 import com.milosboksan.backendroot.entities.dto.CreditTransferOrderDTO;
@@ -9,12 +12,14 @@ import com.milosboksan.backendroot.repositories.ClientRepository;
 import com.milosboksan.backendroot.repositories.CreditTransferOrderRepository;
 import com.milosboksan.backendroot.repositories.CustomerAccountRepository;
 
+@Service
 public class CreditTransferOrderService
 {
 	private CustomerAccountRepository customerAccountRepository;
 	private ClientRepository clientRepository;
 	private CreditTransferOrderRepository creditTransferOrderRepository;
 	
+	@Autowired
 	public CreditTransferOrderEntity creditTransferOrder(CreditTransferOrderDTO creditTransferOrderDTO)
 	{
 		//We need to validate the data of the incoming transfer order before proceeding

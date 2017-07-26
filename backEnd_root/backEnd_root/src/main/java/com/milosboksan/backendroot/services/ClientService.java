@@ -1,5 +1,8 @@
 package com.milosboksan.backendroot.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.milosboksan.backendroot.entities.AddressEntity;
 import com.milosboksan.backendroot.entities.ClientEntity;
 import com.milosboksan.backendroot.entities.ContactInfoEntity;
@@ -7,6 +10,7 @@ import com.milosboksan.backendroot.entities.dto.ClientDTO;
 import com.milosboksan.backendroot.repositories.ClientRepository;
 import com.milosboksan.backendroot.services.exceptions.ExistingEntityException;
 
+@Service
 public class ClientService
 {
 	private ClientRepository clientRepository;
@@ -14,6 +18,7 @@ public class ClientService
 	private AddressService addressService;
 	private ContactInfoService contactInfoService;
 	
+	@Autowired
 	public ClientService(ClientRepository clientRepository, AddressService addressService,
 			ContactInfoService contactInfoService) {
 		super();
