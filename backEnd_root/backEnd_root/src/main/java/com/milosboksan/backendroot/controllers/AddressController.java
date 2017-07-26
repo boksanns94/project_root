@@ -24,7 +24,7 @@ import com.milosboksan.backendroot.util.RESTError;
  */
 
 @RestController
-@RequestMapping("api/addresses")
+@RequestMapping("api/address")
 public class AddressController
 {
 	private AddressRepository addressRepository;

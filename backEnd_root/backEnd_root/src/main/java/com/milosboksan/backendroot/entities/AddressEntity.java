@@ -32,17 +32,17 @@ public class AddressEntity
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String streetName;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String streetNumber;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String cityName;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String postalCode;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String stateName;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String countryName;
 	
 	@JsonBackReference
