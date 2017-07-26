@@ -15,5 +15,7 @@ import com.milosboksan.backendroot.entities.CustomerAccountEntity;
 
 public interface CustomerAccountRepository extends CrudRepository<CustomerAccountEntity, Integer>
 {
-	List<AccountEntity> findByOwnerUsername(String username);
+	List<CustomerAccountEntity> findByOwnerUsername(String username);
+	Boolean existsByAccountNumber(String accountNumber);
+	CustomerAccountEntity findByAccountNumber(String accountNumber);
 }

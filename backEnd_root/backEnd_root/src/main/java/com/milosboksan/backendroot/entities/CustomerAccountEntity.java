@@ -38,13 +38,13 @@ public class CustomerAccountEntity
 	@Column(nullable = false)
 	private Integer status;//0 - Disabled, 1 - Enabled // 1 - default
 	@Column(nullable = false)
-	private Double accountBalance;
+	private Double accountBalance;//Default is 0.0
 	@Column(nullable = false)
-	private Double availableBalance;
+	private Double availableBalance;//Default is 0.0
 	@Column(nullable = false)
-	private Double reservedBalance;
+	private Double reservedBalance;//Default is 0.0
 	@Column(nullable = false)
-	private LocalDate latestActivity;
+	private LocalDate latestActivity;//Default is creation date
 	
 	@JsonBackReference
 	@OneToMany(mappedBy = "customerAccounts", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -123,9 +123,12 @@ public class CustomerAccountEntity
 		this.status = status;
 	}
 	
-	//The account balance is always calculated
 	public Double getAccountBalance() {
-		return this.availableBalance-this.reservedBalance;
+		return accountBalance;
+	}
+
+	public void setAccountBalance(Double accountBalance) {
+		this.accountBalance = accountBalance;
 	}
 
 	public Double getAvailableBalance() {

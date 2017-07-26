@@ -39,7 +39,7 @@ public class CreditTransferOrderEntity
 	@Column(nullable = false)
 	private Integer paymentCode;//Translation: SIFRA PLACANJA
 	@Column(nullable = false)
-	private Double ammount;
+	private Double amount;
 	@Column
 	private String modelNumber;//97 - default
 	@Column
@@ -68,11 +68,6 @@ public class CreditTransferOrderEntity
 	@JoinColumn(name = "recipientAccount")
 	private CustomerAccountEntity recipientAccount;
 	
-	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name = "currency")
-	private CurrencyEntity currency;
-	
 	@Version
 	private Integer version;
 	
@@ -82,15 +77,15 @@ public class CreditTransferOrderEntity
 	}
 
 	public CreditTransferOrderEntity(Integer id, String recipient, String transferPurpose, Integer paymentCode,
-			Double ammount, String modelNumber, String referenceNumber, LocalDate paymentDate, Boolean urgencyStatus,
+			Double amount, String modelNumber, String referenceNumber, LocalDate paymentDate, Boolean urgencyStatus,
 			ClientEntity payingClient, CustomerAccountEntity payerAccount, CustomerAccountEntity recipientAccount,
-			CurrencyEntity currency, Integer version) {
+			Integer version) {
 		super();
 		this.id = id;
 		this.recipient = recipient;
 		this.transferPurpose = transferPurpose;
 		this.paymentCode = paymentCode;
-		this.ammount = ammount;
+		this.amount = amount;
 		this.modelNumber = modelNumber;
 		this.referenceNumber = referenceNumber;
 		this.paymentDate = paymentDate;
@@ -98,7 +93,6 @@ public class CreditTransferOrderEntity
 		this.payingClient = payingClient;
 		this.payerAccount = payerAccount;
 		this.recipientAccount = recipientAccount;
-		this.currency = currency;
 		this.version = version;
 	}
 	
@@ -135,12 +129,12 @@ public class CreditTransferOrderEntity
 		this.paymentCode = paymentCode;
 	}
 
-	public Double getAmmount() {
-		return ammount;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setAmmount(Double ammount) {
-		this.ammount = ammount;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
 	public String getModelNumber() {
@@ -197,14 +191,6 @@ public class CreditTransferOrderEntity
 
 	public void setRecipientAccount(CustomerAccountEntity recipientAccount) {
 		this.recipientAccount = recipientAccount;
-	}
-
-	public CurrencyEntity getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(CurrencyEntity currency) {
-		this.currency = currency;
 	}
 
 	public Integer getVersion() {

@@ -5,7 +5,7 @@ public class CreditTransferOrderDTO
 	private String recipient;
 	private String transferPurpose;
 	private Integer paymentCode;
-	private Double ammount;
+	private Double amount;
 	private String modelNumber;
 	private String referenceNumber;
 	//The date is set automatically on the current date.
@@ -13,27 +13,25 @@ public class CreditTransferOrderDTO
 	private Integer payingClientID;
 	private Integer payerAccountID;
 	private Integer recipientAccountID;
-	private Integer currencyID;
 	
 	public CreditTransferOrderDTO() {
 		super();
 	}
 	
-	public CreditTransferOrderDTO(String recipient, String transferPurpose, Integer paymentCode, Double ammount,
+	public CreditTransferOrderDTO(String recipient, String transferPurpose, Integer paymentCode, Double amount,
 			String modelNumber, String referenceNumber, Boolean urgencyStatus, Integer payingClientID,
-			Integer payerAccountID, Integer recipientAccountID, Integer currencyID) {
+			Integer payerAccountID, Integer recipientAccountID) {
 		super();
 		this.recipient = recipient;
 		this.transferPurpose = transferPurpose;
 		this.paymentCode = paymentCode;
-		this.ammount = ammount;
+		this.amount = amount;
 		this.modelNumber = modelNumber;
 		this.referenceNumber = referenceNumber;
 		this.urgencyStatus = urgencyStatus;
 		this.payingClientID = payingClientID;
 		this.payerAccountID = payerAccountID;
 		this.recipientAccountID = recipientAccountID;
-		this.currencyID = currencyID;
 	}
 
 	public String getRecipient() {
@@ -60,12 +58,12 @@ public class CreditTransferOrderDTO
 		this.paymentCode = paymentCode;
 	}
 
-	public Double getAmmount() {
-		return ammount;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setAmmount(Double ammount) {
-		this.ammount = ammount;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
 	public String getModelNumber() {
@@ -114,14 +112,6 @@ public class CreditTransferOrderDTO
 
 	public void setRecipientAccountID(Integer recipientAccountID) {
 		this.recipientAccountID = recipientAccountID;
-	}
-
-	public Integer getCurrencyID() {
-		return currencyID;
-	}
-
-	public void setCurrencyID(Integer currencyID) {
-		this.currencyID = currencyID;
 	}
 	
 }
