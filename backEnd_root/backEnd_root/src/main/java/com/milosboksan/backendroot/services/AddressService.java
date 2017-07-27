@@ -11,9 +11,9 @@ import com.milosboksan.backendroot.services.exceptions.ExistingEntityException;
 @Service
 public class AddressService
 {
+	@Autowired
 	private AddressRepository addressRepository;
 	
-	@Autowired
 	public AddressService(AddressRepository addressRepository)
 	{
 		this.addressRepository = addressRepository;

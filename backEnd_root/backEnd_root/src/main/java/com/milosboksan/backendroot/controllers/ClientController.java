@@ -25,12 +25,15 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/client")
 public class ClientController
 {
+	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
 	private ContactInfoRepository contactInfoRepository;
+	@Autowired
 	private ClientService clientService;
 	
-	@Autowired
 	public ClientController(ClientRepository clientRepository, AddressRepository addressRepository,
 			ContactInfoRepository contactInfoRepository, ClientService clientService) {
 		super();

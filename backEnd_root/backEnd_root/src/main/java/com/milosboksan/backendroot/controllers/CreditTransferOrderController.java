@@ -19,10 +19,11 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/creditTransferOrder")
 public class CreditTransferOrderController
 {
+	@Autowired
 	private CreditTransferOrderRepository creditTransferOrderRepository;
+	@Autowired
 	private CreditTransferOrderService creditTransferOrderService;
 	
-	@Autowired
 	public CreditTransferOrderController(CreditTransferOrderRepository creditTransferOrderRepository,
 			CreditTransferOrderService creditTransferOrderService) {
 		super();

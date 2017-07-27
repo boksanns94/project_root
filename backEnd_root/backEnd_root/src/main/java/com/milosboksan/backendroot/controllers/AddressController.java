@@ -27,10 +27,11 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/address")
 public class AddressController
 {
+	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
 	private AddressService addressService;
 	
-	@Autowired
 	public AddressController(AddressRepository addressRepository, AddressService addressService) {
 		super();
 		this.addressRepository = addressRepository;

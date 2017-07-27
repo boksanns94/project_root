@@ -1,5 +1,6 @@
 package com.milosboksan.backendroot.services.exceptions;
 
+@SuppressWarnings("serial")
 public class ExistingEntityException extends Exception
 {
 	private Object entity;

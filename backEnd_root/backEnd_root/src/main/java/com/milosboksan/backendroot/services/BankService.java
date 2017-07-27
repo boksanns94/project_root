@@ -13,12 +13,13 @@ import com.milosboksan.backendroot.services.exceptions.ExistingEntityException;
 @Service
 public class BankService
 {
+	@Autowired
 	private BankRepository bankRepository;
-	
+	@Autowired
 	private AddressService addressService;
+	@Autowired
 	private ContactInfoService contactInfoService;
 	
-	@Autowired
 	public BankService(BankRepository bankRepository, AddressService addressService,
 			ContactInfoService contactInfoService) {
 		super();

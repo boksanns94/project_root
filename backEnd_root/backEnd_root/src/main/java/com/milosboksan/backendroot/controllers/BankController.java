@@ -25,12 +25,15 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/bank")
 public class BankController
 {
+	@Autowired
 	private BankRepository bankRepository;
+	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
 	private ContactInfoRepository contactInfoRepository;
+	@Autowired
 	private BankService bankService;
 	
-	@Autowired
 	public BankController(BankRepository bankRepository, AddressRepository addressRepository,
 			ContactInfoRepository contactInfoRepository, BankService bankService) {
 		super();

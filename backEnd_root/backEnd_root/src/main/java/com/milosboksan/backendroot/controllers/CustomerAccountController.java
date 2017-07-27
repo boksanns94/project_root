@@ -21,10 +21,11 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/account")
 public class CustomerAccountController
 {
+	@Autowired
 	CustomerAccountRepository customerAccountRepository;
+	@Autowired
 	CustomerAccountService customerAccountService;
 	
-	@Autowired
 	public CustomerAccountController(CustomerAccountRepository customerAccountRepository,
 			CustomerAccountService customerAccountService) {
 		super();

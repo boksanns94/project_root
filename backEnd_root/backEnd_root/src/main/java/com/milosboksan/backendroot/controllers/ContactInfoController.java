@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.milosboksan.backendroot.entities.AddressEntity;
 import com.milosboksan.backendroot.entities.ContactInfoEntity;
 import com.milosboksan.backendroot.entities.dto.AddressContactInfoDTO;
 import com.milosboksan.backendroot.repositories.ContactInfoRepository;
@@ -21,10 +20,11 @@ import com.milosboksan.backendroot.util.RESTError;
 @RequestMapping("api/contactInfo")
 public class ContactInfoController
 {
+	@Autowired
 	private ContactInfoRepository contactInfoRepository;
+	@Autowired
 	private ContactInfoService contactInfoService;
 	
-	@Autowired
 	public ContactInfoController(ContactInfoRepository contactInfoRepository, ContactInfoService contactInfoService) {
 		super();
 		this.contactInfoRepository = contactInfoRepository;

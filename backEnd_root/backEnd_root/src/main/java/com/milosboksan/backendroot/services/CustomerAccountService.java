@@ -15,11 +15,13 @@ import com.milosboksan.backendroot.services.exceptions.ExistingEntityException;
 @Service
 public class CustomerAccountService
 {
+	@Autowired
 	private BankRepository bankRepository;
+	@Autowired
 	private CustomerAccountRepository customerAccountRepository;
+	@Autowired
 	private ClientRepository clientRepository;
 	
-	@Autowired
 	public CustomerAccountService(BankRepository bankRepository, CustomerAccountRepository customerAccountRepository,
 			ClientRepository clientRepository) {
 		super();
